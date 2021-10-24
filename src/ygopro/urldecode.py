@@ -1,4 +1,5 @@
 import logging
+import time
 import typing
 from urllib.parse import urlparse, parse_qs
 
@@ -6,6 +7,19 @@ import fire
 
 YGO_SCHEME = 'ygo'
 YGO_NETLOC = 'deck'
+
+DEFAULT_HEADER = '#created by ...\n'
+
+CARD_SEP_SYM = '_'
+CARD_MULTI_SYM = '*'
+DEFAULT_SYM = '#'
+NO_SYM = '!'
+
+MAIN_HEADER = 'main\n'
+EXTRA_HEADER = 'extra\n'
+SIDE_HEADER = 'side\n'
+
+DEFAULT_YDK_NAME: str = "default" + "_" + str(int(time.time()))
 
 
 def decode_url(url: str) -> str:
@@ -31,9 +45,9 @@ def get_code_arr(part_str: str) -> typing.List:
     if not part_str:
         return res
 
-    parts = str.split(part_str, '_')
+    parts = str.split(part_str, CARD_SEP_SYM)
     for counted_part in parts:
-        code_count_pair = str.split(counted_part, '*')
+        code_count_pair = str.split(counted_part, CARD_MULTI_SYM)
 
         pair_len = len(code_count_pair)
         if pair_len == 1:
@@ -44,20 +58,21 @@ def get_code_arr(part_str: str) -> typing.List:
     return res
 
 
-DEFAULT_HEADER = '#created by ...\n'
-
-DEFAULT_SYM = '#'
-NO_SYM = '!'
-
-MAIN_HEADER = 'main\n'
-EXTRA_HEADER = 'extra\n'
-SIDE_HEADER = 'side\n'
+def get_target_field_str(target_dict: typing.Dict, field_name: str, index: int = 0) -> str:
+    res = ""
+    try:
+        res = target_dict[field_name][index]
+    except KeyError:
+        logging.info("key error")
+    finally:
+        return res
 
 
 def get_deck_str(query_dict: typing.Dict) -> str:
-    main_deck_arr = get_code_arr(query_dict['main'][0])
-    extra_deck_arr = get_code_arr(query_dict['extra'][0])
-    side_deck_arr = get_code_arr(query_dict['side'][0])
+    main_deck_arr = get_code_arr(get_target_field_str(query_dict, 'main'))
+    print(main_deck_arr)
+    extra_deck_arr = get_code_arr(get_target_field_str(query_dict, 'extra'))
+    side_deck_arr = get_code_arr(get_target_field_str(query_dict, 'side'))
 
     target_str = DEFAULT_HEADER
 
@@ -72,7 +87,7 @@ def get_deck_str(query_dict: typing.Dict) -> str:
     return target_str
 
 
-def save_file(file_name: str, origin_url: str):
+def save_file(origin_url: str, file_name: str = DEFAULT_YDK_NAME):
     res_str = decode_url(origin_url)
 
     with open('.'.join([file_name, 'ydk']), 'w') as f:
