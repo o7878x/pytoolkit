@@ -130,3 +130,11 @@ dmypy.json
 
 # Pycharm idea config
 .idea
+
+# Zip archive
+*.7z
+*.7zz
+*.zip
+
+# test source
+test_source/
