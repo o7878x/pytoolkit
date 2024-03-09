@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 from src.timer.base_timer import BaseTimer
 
 

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 class BaseTimerException(RuntimeError):
     def __init__(self, msg: str):
         self.msg = msg

@@ -1,3 +1,6 @@
+# !/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 import fire
 from PIL import Image
 

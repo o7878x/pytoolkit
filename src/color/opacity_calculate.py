@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 _MIN_TWO_DIGIT_HEX: int = 0x00
 _MAX_TWO_DIGIT_HEX: int = 0xFF
 
