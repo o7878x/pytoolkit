@@ -17,6 +17,17 @@ def mod_m(x: int, m: int) -> int:
     return x & (m - 1)
 
 
+def fast_power(x: int, n: int) -> int:
+    # ref: https://zhuanlan.zhihu.com/p/95902286
+    res = 1
+    while n > 0:
+        if n & 1:
+            res *= x
+        x *= x
+        n >>= 1
+    return res
+
+
 if __name__ == '__main__':
     assert is_odd_integer(1)
     assert not is_odd_integer(2)
@@ -29,3 +40,5 @@ if __name__ == '__main__':
     assert low_bit(2) == 2
 
     assert mod_m(5, 4) == 1
+
+    assert fast_power(2, 10) == 1024
