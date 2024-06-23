@@ -28,6 +28,10 @@ def fast_power(x: int, n: int) -> int:
     return res
 
 
+def is_same_sign_except_zero(x: int, y: int) -> int:
+    return (x ^ y) >= 0
+
+
 if __name__ == '__main__':
     assert is_odd_integer(1)
     assert not is_odd_integer(2)
@@ -42,3 +46,7 @@ if __name__ == '__main__':
     assert mod_m(5, 4) == 1
 
     assert fast_power(2, 10) == 1024
+
+    assert not is_same_sign_except_zero(10, -9)
+    assert is_same_sign_except_zero(10, 10)
+    assert is_same_sign_except_zero(-10, -10)
