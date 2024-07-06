@@ -5,5 +5,5 @@ python daily toolkit for programming
 
 | name | function | remark |
 | --- | --- | --- |
-| c++ references | https://zh.cppreference.com/w/cpp | |
+| C++ references | https://zh.cppreference.com/w/cpp | |
 | C++ insights | https://cppinsights.io/ | |
