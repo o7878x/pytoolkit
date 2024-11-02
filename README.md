@@ -1,5 +1,11 @@
 # pytoolkit
-python daily toolkit for programming
+Python code snippets
+
+# Install Requirements
+
+```shell
+pip3 install -r requirements.txt
+```
 
 # useful sites
 
